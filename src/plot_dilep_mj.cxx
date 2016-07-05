@@ -131,66 +131,66 @@ int main(int argc, char *argv[]){
   PlotMaker pm, pm_2015;
 
   float minx(0), maxx(460);
-  int nbins(static_cast<int>((maxx-minx)/10));
+  size_t nbins(static_cast<size_t>((maxx-minx)/10));
   minx = 25; maxx = 1000; nbins = static_cast<int>((maxx-minx)/75);
 
   string mjname = "M_{J}^{with lep}";
   if(do_rc) mjname = "M_{J}^{no lep}";
   
   /////////// 1 lepton
-  pm_2015.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-				    "met>200&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=3", "weight", 
-				    {250., 400.}),procs_2015, plot_types);
+  pm_2015.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+				    "met>200&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=3", "weight"),
+                           procs_2015, plot_types);
   if(!do_rc){
-    pm_2015.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-				      "met>200&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight", 
-				      {250., 400.}),procs_2015, plot_types);
-    pm_2015.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-				      "met>200&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=6", "weight", 
-				      {250., 400.}),procs_2015, plot_types);
+    pm_2015.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+				      "met>200&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight"), 
+				      procs_2015, plot_types);
+    pm_2015.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+				      "met>200&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=6", "weight"), 
+				      procs_2015, plot_types);
   }
-  pm.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-  			       "met>150&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=3", "weight", 
-  			       {250., 400.}),lowmet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+  			       "met>150&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=3", "weight"), 
+  			       lowmet_procs, plot_types);
   if(!do_rc){
-    pm.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-				 "met>150&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight", 
-				 {250., 400.}),lowmet_procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-				 "met>150&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=6", "weight", 
-				 {250., 400.}),lowmet_procs, plot_types);
+    pm.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+				 "met>150&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight"), 
+				 lowmet_procs, plot_types);
+    pm.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+				 "met>150&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=6", "weight"), 
+				 lowmet_procs, plot_types);
   }
 
 
   /////////// 2 leptons
-  pm_2015.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-			       "met>200&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=3", "weight", 
-				    {250., 400.}),procs_2015, plot_types);
+  pm_2015.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+			       "met>200&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=3", "weight"), 
+				    procs_2015, plot_types);
   if(!do_rc){
-    pm_2015.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-				      "met>200&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=5", "weight", 
-				      {250., 400.}),procs_2015, plot_types);
-    pm_2015.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-				      "met>200&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=6", "weight", 
-				      {250., 400.}),procs_2015, plot_types);
+    pm_2015.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+				      "met>200&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=5", "weight"), 
+				      procs_2015, plot_types);
+    pm_2015.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+				      "met>200&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=6", "weight"), 
+				      procs_2015, plot_types);
   }
 
-  pm.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-  			       "met>150&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=3", "weight", 
-  			       {250., 400.}),lowmet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+  			       "met>150&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=3", "weight"), 
+  			       lowmet_procs, plot_types);
   if(!do_rc){
-    pm.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-				 "met>200&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets==3", "weight", 
-				 {250., 400.}),lowmet_procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-				 "met>200&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets==4", "weight", 
-				 {250., 400.}),lowmet_procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-				 "met>150&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=5", "weight", 
-				 {250., 400.}),lowmet_procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(nbins, minx, maxx, "mj14", mjname+" [GeV]",
-				 "met>150&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=6", "weight", 
-				 {250., 400.}),lowmet_procs, plot_types);
+    pm.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+				 "met>200&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets==3", "weight"), 
+				 lowmet_procs, plot_types);
+    pm.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+				 "met>200&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets==4", "weight"), 
+				 lowmet_procs, plot_types);
+    pm.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+				 "met>150&&met<500 && mt<=140 && nleps==1 && nbm>=1 && njets>=5", "weight"), 
+				 lowmet_procs, plot_types);
+    pm.Push<HistoStack>(HistoDef({nbins, minx, maxx, "mj14", mjname+" [GeV]",{250.,400.}},
+				 "met>150&&met<500 && nels==1 && nmus==1 && nbm<=2 && njets>=6", "weight"), 
+				 lowmet_procs, plot_types);
   }
 
 

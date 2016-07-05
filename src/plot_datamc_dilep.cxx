@@ -53,11 +53,11 @@ int main(){
     {mc_2015+"*_TTWJets*.root", mc_2015+"*_TTZTo*.root"});
   auto other_2015 = Proc<Baby_full>("Other", Process::Type::background, colors("other"),
     {mc_2015+"*DYJetsToLL*.root", mc_2015+"*_QCD_HT*.root",
-     mc_2015+"*_ZJet*.root", mc_2015+"*_WWTo*.root",
-     mc_2015+"*ggZH_HToBB*.root", mc_2015+"*ttHJetTobb*.root",
-     mc_2015+"*_TTGJets*.root", mc_2015+"*_TTTT_*.root",
-     mc_2015+"*_WH_HToBB*.root", mc_2015+"*_WZTo*.root",
-     mc_2015+"*_ZH_HToBB*.root", mc_2015+"_ZZ_*.root"});
+        mc_2015+"*_ZJet*.root", mc_2015+"*_WWTo*.root",
+        mc_2015+"*ggZH_HToBB*.root", mc_2015+"*ttHJetTobb*.root",
+        mc_2015+"*_TTGJets*.root", mc_2015+"*_TTTT_*.root",
+        mc_2015+"*_WH_HToBB*.root", mc_2015+"*_WZTo*.root",
+        mc_2015+"*_ZH_HToBB*.root", mc_2015+"_ZZ_*.root"});
 
   auto data2015 = Proc<Baby_full>("Data", Process::Type::data, kBlack,
     {data_2015+"*.root"},"pass&&(trig[4]||trig[8])");
@@ -75,11 +75,11 @@ int main(){
     {mc_2016+"*_TTWJets*.root", mc_2016+"*_TTZTo*.root"});
   auto other_2016 = Proc<Baby_full>("Other", Process::Type::background, colors("other"),
     {mc_2016+"*DYJetsToLL*.root", mc_2016+"*_QCD_HT*.root",
-     mc_2016+"*_ZJet*.root", mc_2016+"*_WWTo*.root",
-     mc_2016+"*ggZH_HToBB*.root", mc_2016+"*ttHJetTobb*.root",
-     mc_2016+"*_TTGJets*.root", mc_2016+"*_TTTT_*.root",
-     mc_2016+"*_WH_HToBB*.root", mc_2016+"*_WZTo*.root",
-     mc_2016+"*_ZH_HToBB*.root", mc_2016+"_ZZ_*.root"});
+        mc_2016+"*_ZJet*.root", mc_2016+"*_WWTo*.root",
+        mc_2016+"*ggZH_HToBB*.root", mc_2016+"*ttHJetTobb*.root",
+        mc_2016+"*_TTGJets*.root", mc_2016+"*_TTTT_*.root",
+        mc_2016+"*_WH_HToBB*.root", mc_2016+"*_WZTo*.root",
+        mc_2016+"*_ZH_HToBB*.root", mc_2016+"_ZZ_*.root"});
 
   auto data2016 = Proc<Baby_full>("Data", Process::Type::data, kBlack,
     {data_2016+"*.root"},"pass&&(trig[4]||trig[8]||trig[13]||trig[33])&&json2p6");
@@ -124,84 +124,84 @@ int main(){
       if(ilep>3) cut2l_base = "ht>500&&met>200&&"+leps[ilep]+"&&njets>=6&&nbm>=1&&mt<=140";
 
       //MJ
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",
-					cut2l_base+"&&met<=350","weight", {250, 400}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",
-					cut2l_base+"&&met>350&&met<=500","weight", {250, 400}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met<=350","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met>350&&met<=500","weight"),sams[iyr], all_plot_types);
       
       //MJ low mt di-lepton
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",
-					cut2l_base+"&&met<=350&&mt<=140","weight", {250, 400}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",
-					cut2l_base+"&&met>350&&met<=500&&mt<=140","weight", {250, 400}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met<=350&&mt<=140","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met>350&&met<=500&&mt<=140","weight"),sams[iyr], all_plot_types);
 
       //MJ low mt di-lepton
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",
-					cut2l_base+"&&met<=350&&mt<=140","weight", {250, 400}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",
-					cut2l_base+"&&met>350&&met<=500&&mt<=140","weight", {250, 400}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met<=350&&mt<=140","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met>350&&met<=500&&mt<=140","weight"),sams[iyr], all_plot_types);
 
       //MJ high mt di-lepton
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",
-					cut2l_base+"&&met<=350&&mt>140","weight", {250, 400}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",
-					cut2l_base+"&&met>350&&met<=500&&mt>140","weight", {250, 400}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met<=350&&mt>140","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met>350&&met<=500&&mt>140","weight"),sams[iyr], all_plot_types);
 
       //D3 and D4
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj14>250&&"+cut2l_base+"&&met<=350","weight", {140.}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj14>250&&"+cut2l_base+"&&met>350&&met<=500","weight", {140.}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj14>250&&"+cut2l_base+"&&met<=350","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj14>250&&"+cut2l_base+"&&met>350&&met<=500","weight"),sams[iyr], all_plot_types);
       //D3
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj14>250&&"+cut2l_base+"&&mj14<=400&&met<=350","weight", {140.}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj14>250&&"+cut2l_base+"&&mj14<=400&&met>350&&met<=500","weight", {140.}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj14>250&&"+cut2l_base+"&&mj14<=400&&met<=350","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj14>250&&"+cut2l_base+"&&mj14<=400&&met>350&&met<=500","weight"),sams[iyr], all_plot_types);
       //D4
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj14>250&&"+cut2l_base+"&&mj14>400&&met<=350","weight", {140.}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj14>250&&"+cut2l_base+"&&mj14>400&&met>350&&met<=500","weight", {140.}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj14>250&&"+cut2l_base+"&&mj14>400&&met<=350","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj14>250&&"+cut2l_base+"&&mj14>400&&met>350&&met<=500","weight"),sams[iyr], all_plot_types);
       
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 12, 200., 500., "met", "MET [GeV]",
-					"mj14>250&&"+cut2l_base+"&&met<=500","weight", {200}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {12, 200., 500., "met", "MET [GeV]", {200.}},
+                                        "mj14>250&&"+cut2l_base+"&&met<=500","weight"),sams[iyr], all_plot_types);
 
       //MJ12 Plots
       ReplaceAll(cut2l_base,"mj14","mj");
 
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]",
-					cut2l_base+"&&met<=350","weight", {250, 400.}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]",
-					cut2l_base+"&&met>350&&met<=500","weight", {250, 400.}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met<=350","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met>350&&met<=500","weight"),sams[iyr], all_plot_types);
       //MJ low mt di-lepton
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]",
-					cut2l_base+"&&met<=350&&mt<=140","weight", {250, 400}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]",
-					cut2l_base+"&&met>350&&met<=500&&mt<=140","weight", {250, 400}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met<=350&&mt<=140","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met>350&&met<=500&&mt<=140","weight"),sams[iyr], all_plot_types);
       //MJ high mt di-lepton
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]",
-					cut2l_base+"&&met<=350&&mt>140","weight", {250, 400}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]",
-					cut2l_base+"&&met>350&&met<=500&&mt>140","weight", {250, 400}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met<=350&&mt>140","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]", {250., 400.}},
+                                        cut2l_base+"&&met>350&&met<=500&&mt>140","weight"),sams[iyr], all_plot_types);
 
       //D3 and D4
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj>250&&"+cut2l_base+"&&met<=350","weight", {140.}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj>250&&"+cut2l_base+"&&met>350&&met<=500","weight", {140.}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj>250&&"+cut2l_base+"&&met<=350","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj>250&&"+cut2l_base+"&&met>350&&met<=500","weight"),sams[iyr], all_plot_types);
       //D3
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj>250&&"+cut2l_base+"&&mj<=400&&met<=350","weight", {140.}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj>250&&"+cut2l_base+"&&mj<=400&&met>350&&met<=500","weight", {140.}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj>250&&"+cut2l_base+"&&mj<=400&&met<=350","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj>250&&"+cut2l_base+"&&mj<=400&&met>350&&met<=500","weight"),sams[iyr], all_plot_types);
       //D4
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj>250&&"+cut2l_base+"&&mj>400&&met<=350","weight", {140.}),sams[iyr], all_plot_types);
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 20, 0., 700., "mt", "m_{T} [GeV]",
-					"mj>250&&"+cut2l_base+"&&mj>400&&met>350&&met<=500","weight", {140.}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj>250&&"+cut2l_base+"&&mj>400&&met<=350","weight"),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {20, 0., 700., "mt", "m_{T} [GeV]", {140.}},
+                                        "mj>250&&"+cut2l_base+"&&mj>400&&met>350&&met<=500","weight"),sams[iyr], all_plot_types);
 
-      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], 12, 200., 500., "met", "MET [GeV]",
-					"mj>250&&"+cut2l_base+"&&met<=500","weight", {200}),sams[iyr], all_plot_types);
+      pm[iyr].Push<HistoStack>(HistoDef(sam_tag[iyr]+"_"+lep_tag[ilep], {12, 200., 500., "met", "MET [GeV]", {200.}},
+                                        "mj>250&&"+cut2l_base+"&&met<=500","weight"),sams[iyr], all_plot_types);
     }
     //    pm[iyr].MakePlots(lumi[iyr]); 
   }
@@ -210,59 +210,59 @@ int main(){
   //2015 Samples
   auto allmc_lowmt_2015 = Proc<Baby_full>("2015, low m_{T}", Process::Type::background, colors("tt_2l"),
     {mc_2015+"*_TTJets*Lept*.root", mc_2015+"*_TTJets_HT*.root",
-	mc_2015+"*_TTJets*Lept*.root", mc_2015+"*_TTJets_HT*.root",
-	mc_2015+"*_WJetsToLNu*.root",
-	mc_2015+"*_ST_*.root",
-	mc_2015+"*_TTWJets*.root", mc_2015+"*_TTZTo*.root",
-	mc_2015+"*DYJetsToLL*.root", mc_2015+"*_QCD_HT*.root",
-	mc_2015+"*_ZJet*.root", mc_2015+"*_WWTo*.root",
-	mc_2015+"*ggZH_HToBB*.root", mc_2015+"*ttHJetTobb*.root",
-	mc_2015+"*_TTGJets*.root", mc_2015+"*_TTTT_*.root",
-	mc_2015+"*_WH_HToBB*.root", mc_2015+"*_WZTo*.root",
-	mc_2015+"*_ZH_HToBB*.root", mc_2015+"_ZZ_*.root"}, 
+        mc_2015+"*_TTJets*Lept*.root", mc_2015+"*_TTJets_HT*.root",
+        mc_2015+"*_WJetsToLNu*.root",
+        mc_2015+"*_ST_*.root",
+        mc_2015+"*_TTWJets*.root", mc_2015+"*_TTZTo*.root",
+        mc_2015+"*DYJetsToLL*.root", mc_2015+"*_QCD_HT*.root",
+        mc_2015+"*_ZJet*.root", mc_2015+"*_WWTo*.root",
+        mc_2015+"*ggZH_HToBB*.root", mc_2015+"*ttHJetTobb*.root",
+        mc_2015+"*_TTGJets*.root", mc_2015+"*_TTTT_*.root",
+        mc_2015+"*_WH_HToBB*.root", mc_2015+"*_WZTo*.root",
+        mc_2015+"*_ZH_HToBB*.root", mc_2015+"_ZZ_*.root"}, 
     "stitch&&mt<=140");
 
   auto allmc_highmt_2015 = Proc<Baby_full>("2015, low m_{T}", Process::Type::data, kBlack,
     {mc_2015+"*_TTJets*Lept*.root", mc_2015+"*_TTJets_HT*.root",
-	mc_2015+"*_TTJets*Lept*.root", mc_2015+"*_TTJets_HT*.root",
-	mc_2015+"*_WJetsToLNu*.root",
-	mc_2015+"*_ST_*.root",
-	mc_2015+"*_TTWJets*.root", mc_2015+"*_TTZTo*.root",
-	mc_2015+"*DYJetsToLL*.root", mc_2015+"*_QCD_HT*.root",
-	mc_2015+"*_ZJet*.root", mc_2015+"*_WWTo*.root",
-	mc_2015+"*ggZH_HToBB*.root", mc_2015+"*ttHJetTobb*.root",
-	mc_2015+"*_TTGJets*.root", mc_2015+"*_TTTT_*.root",
-	mc_2015+"*_WH_HToBB*.root", mc_2015+"*_WZTo*.root",
-	mc_2015+"*_ZH_HToBB*.root", mc_2015+"_ZZ_*.root"}, 
+        mc_2015+"*_TTJets*Lept*.root", mc_2015+"*_TTJets_HT*.root",
+        mc_2015+"*_WJetsToLNu*.root",
+        mc_2015+"*_ST_*.root",
+        mc_2015+"*_TTWJets*.root", mc_2015+"*_TTZTo*.root",
+        mc_2015+"*DYJetsToLL*.root", mc_2015+"*_QCD_HT*.root",
+        mc_2015+"*_ZJet*.root", mc_2015+"*_WWTo*.root",
+        mc_2015+"*ggZH_HToBB*.root", mc_2015+"*ttHJetTobb*.root",
+        mc_2015+"*_TTGJets*.root", mc_2015+"*_TTTT_*.root",
+        mc_2015+"*_WH_HToBB*.root", mc_2015+"*_WZTo*.root",
+        mc_2015+"*_ZH_HToBB*.root", mc_2015+"_ZZ_*.root"}, 
     "stitch&&mt>=140");
 
   //2016 Samples
   auto allmc_lowmt_2016 = Proc<Baby_full>("2016, low m_{T}", Process::Type::background, colors("tt_2l"),
     {mc_2016+"*_TTJets*Lept*.root", mc_2016+"*_TTJets_HT*.root",
-	mc_2016+"*_TTJets*Lept*.root", mc_2016+"*_TTJets_HT*.root",
-	mc_2016+"*_WJetsToLNu*.root",
-	mc_2016+"*_ST_*.root",
-	mc_2016+"*_TTWJets*.root", mc_2016+"*_TTZTo*.root",
-	mc_2016+"*DYJetsToLL*.root", mc_2016+"*_QCD_HT*.root",
-	mc_2016+"*_ZJet*.root", mc_2016+"*_WWTo*.root",
-	mc_2016+"*ggZH_HToBB*.root", mc_2016+"*ttHJetTobb*.root",
-	mc_2016+"*_TTGJets*.root", mc_2016+"*_TTTT_*.root",
-	mc_2016+"*_WH_HToBB*.root", mc_2016+"*_WZTo*.root",
-	mc_2016+"*_ZH_HToBB*.root", mc_2016+"_ZZ_*.root"}, 
+        mc_2016+"*_TTJets*Lept*.root", mc_2016+"*_TTJets_HT*.root",
+        mc_2016+"*_WJetsToLNu*.root",
+        mc_2016+"*_ST_*.root",
+        mc_2016+"*_TTWJets*.root", mc_2016+"*_TTZTo*.root",
+        mc_2016+"*DYJetsToLL*.root", mc_2016+"*_QCD_HT*.root",
+        mc_2016+"*_ZJet*.root", mc_2016+"*_WWTo*.root",
+        mc_2016+"*ggZH_HToBB*.root", mc_2016+"*ttHJetTobb*.root",
+        mc_2016+"*_TTGJets*.root", mc_2016+"*_TTTT_*.root",
+        mc_2016+"*_WH_HToBB*.root", mc_2016+"*_WZTo*.root",
+        mc_2016+"*_ZH_HToBB*.root", mc_2016+"_ZZ_*.root"}, 
     "stitch&&mt<=140");
 
   auto allmc_highmt_2016 = Proc<Baby_full>("2016, high m_{T}", Process::Type::data, kBlack,
     {mc_2016+"*_TTJets*Lept*.root", mc_2016+"*_TTJets_HT*.root",
-	mc_2016+"*_TTJets*Lept*.root", mc_2016+"*_TTJets_HT*.root",
-	mc_2016+"*_WJetsToLNu*.root",
-	mc_2016+"*_ST_*.root",
-	mc_2016+"*_TTWJets*.root", mc_2016+"*_TTZTo*.root",
-	mc_2016+"*DYJetsToLL*.root", mc_2016+"*_QCD_HT*.root",
-	mc_2016+"*_ZJet*.root", mc_2016+"*_WWTo*.root",
-	mc_2016+"*ggZH_HToBB*.root", mc_2016+"*ttHJetTobb*.root",
-	mc_2016+"*_TTGJets*.root", mc_2016+"*_TTTT_*.root",
-	mc_2016+"*_WH_HToBB*.root", mc_2016+"*_WZTo*.root",
-	mc_2016+"*_ZH_HToBB*.root", mc_2016+"_ZZ_*.root"}, 
+        mc_2016+"*_TTJets*Lept*.root", mc_2016+"*_TTJets_HT*.root",
+        mc_2016+"*_WJetsToLNu*.root",
+        mc_2016+"*_ST_*.root",
+        mc_2016+"*_TTWJets*.root", mc_2016+"*_TTZTo*.root",
+        mc_2016+"*DYJetsToLL*.root", mc_2016+"*_QCD_HT*.root",
+        mc_2016+"*_ZJet*.root", mc_2016+"*_WWTo*.root",
+        mc_2016+"*ggZH_HToBB*.root", mc_2016+"*ttHJetTobb*.root",
+        mc_2016+"*_TTGJets*.root", mc_2016+"*_TTTT_*.root",
+        mc_2016+"*_WH_HToBB*.root", mc_2016+"*_WZTo*.root",
+        mc_2016+"*_ZH_HToBB*.root", mc_2016+"_ZZ_*.root"}, 
     "stitch&&mt>=140");
 
   vector<shared_ptr<Process> > mc2015 = {allmc_lowmt_2015, allmc_highmt_2015};
@@ -281,17 +281,17 @@ int main(){
       string cut2l_base = "ht>500&&met>200&&"+leps_mc[ilep]+"&&njets>=5&&nbm<=2";
 
       //MJ
-      pm_mc[iyr].Push<HistoStack>(HistoDef(sam_mc_tag[iyr]+"_"+lep_mc_tag[ilep], 20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",
-					cut2l_base+"&&met<=350","weight", {250, 400}),sams_mc[iyr], mc_plot_types);
-      pm_mc[iyr].Push<HistoStack>(HistoDef(sam_mc_tag[iyr]+"_"+lep_mc_tag[ilep], 20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",
-					cut2l_base+"&&met>350&&met<=500","weight", {250, 400}),sams_mc[iyr], mc_plot_types);
+      pm_mc[iyr].Push<HistoStack>(HistoDef(sam_mc_tag[iyr]+"_"+lep_mc_tag[ilep], {20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",{250.,400.}},
+              cut2l_base+"&&met<=350","weight"),sams_mc[iyr], mc_plot_types);
+      pm_mc[iyr].Push<HistoStack>(HistoDef(sam_mc_tag[iyr]+"_"+lep_mc_tag[ilep], {20, 0., 1000., "mj14", "M_{J}^{1.4} [GeV]",{250.,400.}},
+              cut2l_base+"&&met>350&&met<=500","weight"),sams_mc[iyr], mc_plot_types);
 
       ReplaceAll(cut2l_base,"mj14","mj");
       
-      pm_mc[iyr].Push<HistoStack>(HistoDef(sam_mc_tag[iyr]+"_"+lep_mc_tag[ilep], 20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]",
-					cut2l_base+"&&met<=350","weight", {250, 400.}),sams_mc[iyr], mc_plot_types);
-      pm_mc[iyr].Push<HistoStack>(HistoDef(sam_mc_tag[iyr]+"_"+lep_mc_tag[ilep], 20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]",
-					cut2l_base+"&&met>350&&met<=500","weight", {250, 400.}),sams_mc[iyr], mc_plot_types);
+      pm_mc[iyr].Push<HistoStack>(HistoDef(sam_mc_tag[iyr]+"_"+lep_mc_tag[ilep], {20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]",{250.,400.}},
+                                           cut2l_base+"&&met<=350","weight"),sams_mc[iyr], mc_plot_types);
+      pm_mc[iyr].Push<HistoStack>(HistoDef(sam_mc_tag[iyr]+"_"+lep_mc_tag[ilep], {20, 0., 1000., "mj", "M_{J}^{1.2} [GeV]",{250.,400.}},
+                                           cut2l_base+"&&met>350&&met<=500","weight"),sams_mc[iyr], mc_plot_types);
     }
     pm_mc[iyr].MakePlots(lumi[iyr]); 
   }

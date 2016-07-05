@@ -174,7 +174,7 @@ void HistoStack::SingleHist::RecordEvent(const Baby &baby){
     }
   }
 
-  const NamedFunc &val = stack.definition_.var_;
+  const NamedFunc &val = stack.definition_.x_axis_.var_;
   NamedFunc::ScalarType val_scalar = 0.;
   if(val.IsScalar()){
     val_scalar = val.GetScalar(baby);
@@ -280,10 +280,10 @@ HistoStack::HistoStack(const HistoDef &definition,
   mc_scale_error_(){
   if(plot_options_.size() > 0) this_opt_ = plot_options_.front();
 
-  string x_title = definition.x_title_;
-  if(definition.units_ != "") x_title += " ["+definition.units_+"]";
+  string x_title = definition.x_axis_.title_;
+  if(definition.x_axis_.units_ != "") x_title += " ["+definition.x_axis_.units_+"]";
 
-  TH1D empty("", (";"+x_title+";").c_str(), definition.Nbins(), &definition.Bins().at(0));
+  TH1D empty("", (";"+x_title+";").c_str(), definition.x_axis_.Bins().size(), &definition.x_axis_.Bins().at(0));
   empty.SetStats(false);
   empty.Sumw2(true);
   for(const auto &process: processes){
@@ -547,7 +547,7 @@ void HistoStack::NormalizeHistos() const{
   mc_scale_error_ = 1.;
   if(this_opt_.Stack() == StackType::data_norm){
     if(datas_.size() == 0 || backgrounds_.size() == 0) return;
-    int nbins = definition_.Nbins();
+    int nbins = definition_.x_axis_.Bins().size();
     double data_error, mc_error;
     double data_norm = datas_.front()->scaled_hist_.IntegralAndError(0, nbins+1, data_error, "width");
     double mc_norm = backgrounds_.front()->scaled_hist_.IntegralAndError(0, nbins+1, mc_error, "width");
@@ -637,7 +637,7 @@ void HistoStack::StyleHisto(TH1D &h) const{
   h.SetLabelFont(this_opt_.Font(), "xyz");
   h.SetTitleFont(this_opt_.Font(), "xyz");
 
-  double bin_width = (definition_.Bins().back()-definition_.Bins().front())/(definition_.Nbins());
+  double bin_width = (definition_.x_axis_.Bins().back()-definition_.x_axis_.Bins().front())/(definition_.x_axis_.Bins().size());
 
   ostringstream title;
   switch(this_opt_.Stack()){
@@ -648,12 +648,12 @@ void HistoStack::StyleHisto(TH1D &h) const{
   case StackType::data_norm:
   case StackType::lumi_shapes:
     title << "Entries/(" << bin_width;
-    if(definition_.units_ != "") title << " " << definition_.units_;
+    if(definition_.x_axis_.units_ != "") title << " " << definition_.x_axis_.units_;
     title << ")";
     break;
   case StackType::shapes:
     title << "% entries/(" << bin_width;
-    if(definition_.units_ != "") title << " " << definition_.units_;
+    if(definition_.x_axis_.units_ != "") title << " " << definition_.x_axis_.units_;
     title << ")";
     break;
   }
@@ -820,7 +820,7 @@ vector<shared_ptr<TLatex> > HistoStack::GetTitleTexts() const{
 TGraphAsymmErrors HistoStack::GetBackgroundError() const{
   TGraphAsymmErrors g;
   if(backgrounds_.size() == 0){
-    TH1D h("", "", definition_.Nbins(), &definition_.Bins().at(0));
+    TH1D h("", "", definition_.x_axis_.Bins().size(), &definition_.x_axis_.Bins().at(0));
     g = TGraphAsymmErrors(&h);
   }else{
     g = TGraphAsymmErrors(&(backgrounds_.front()->scaled_hist_));
@@ -851,8 +851,8 @@ vector<TLine> HistoStack::GetCutLines(double y_min, double y_max, bool adjust_bo
     case YAxisType::log:    bottom = y_min > this_opt_.LogMinimum() ? y_min : this_opt_.LogMinimum(); break;
     }
   }
-  vector<TLine> out(definition_.cut_vals_.size());
-  for(double cut: definition_.cut_vals_){
+  vector<TLine> out(definition_.x_axis_.cut_vals_.size());
+  for(double cut: definition_.x_axis_.cut_vals_){
     out.emplace_back(cut, bottom, cut, y_max);
     out.back().SetNDC(false);
     out.back().SetLineStyle(2);
@@ -952,8 +952,8 @@ std::vector<TH1D> HistoStack::GetBottomPlots(double &the_min, double &the_max) c
   \return Line at appropriate height depending on plot style
 */
 TLine HistoStack::GetBottomHorizontal() const{
-  double left = definition_.Bins().front();
-  double right = definition_.Bins().back();
+  double left = definition_.x_axis_.Bins().front();
+  double right = definition_.x_axis_.Bins().back();
   double y;
   switch(this_opt_.Bottom()){
   case BottomType::ratio: y = 1.; break;

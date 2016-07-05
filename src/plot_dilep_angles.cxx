@@ -96,17 +96,17 @@ int main(){
     std::string tag = "angles_"+cat.first;
     const NamedFunc &cut = cat.second;
 
-    pm.Push<HistoStack>(HistoDef(tag, 20, 0., pi, dphi_ll, "#Delta#phi(l,l)", cut), procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(tag, 20, 0., pi, min_dphi_lmet, "Min. #Delta#phi(l,MET)", cut), procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(tag, 20, 0., pi, max_dphi_lmet, "Max. #Delta#phi(l,MET)", cut), procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(tag, 20, 0., pi, min_dphi_lj, "Min. #Delta#phi(l,jet)", cut), procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(tag, 20, 0., pi, max_dphi_lj, "Max. #Delta#phi(l,jet)", cut), procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(tag, 20, 0., pi, min_dphi_metj, "Min. #Delta#phi(MET,jet)", cut), procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(tag, 20, 0., pi, max_dphi_metj, "Max. #Delta#phi(MET,jet)", cut), procs, plot_types);
+    pm.Push<HistoStack>(HistoDef(tag, {20, 0., pi, dphi_ll, "#Delta#phi(l,l)"}, cut), procs, plot_types);
+    pm.Push<HistoStack>(HistoDef(tag, {20, 0., pi, min_dphi_lmet, "Min. #Delta#phi(l,MET)"}, cut), procs, plot_types);
+    pm.Push<HistoStack>(HistoDef(tag, {20, 0., pi, max_dphi_lmet, "Max. #Delta#phi(l,MET)"}, cut), procs, plot_types);
+    pm.Push<HistoStack>(HistoDef(tag, {20, 0., pi, min_dphi_lj, "Min. #Delta#phi(l,jet)"}, cut), procs, plot_types);
+    pm.Push<HistoStack>(HistoDef(tag, {20, 0., pi, max_dphi_lj, "Max. #Delta#phi(l,jet)"}, cut), procs, plot_types);
+    pm.Push<HistoStack>(HistoDef(tag, {20, 0., pi, min_dphi_metj, "Min. #Delta#phi(MET,jet)"}, cut), procs, plot_types);
+    pm.Push<HistoStack>(HistoDef(tag, {20, 0., pi, max_dphi_metj, "Max. #Delta#phi(MET,jet)"}, cut), procs, plot_types);
 
-    pm.Push<HistoStack>(HistoDef(tag, 20, 0., 6, dr_ll, "#Delta R(l,l)", cut), procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(tag, 20, 0., 6, min_dr_lj, "Min. #Delta R(l,jet)", cut), procs, plot_types);
-    pm.Push<HistoStack>(HistoDef(tag, 20, 0., 6, max_dr_lj, "Max. #Delta R(l,jet)", cut), procs, plot_types);
+    pm.Push<HistoStack>(HistoDef(tag, {20, 0., 6, dr_ll, "#Delta R(l,l)"}, cut), procs, plot_types);
+    pm.Push<HistoStack>(HistoDef(tag, {20, 0., 6, min_dr_lj, "Min. #Delta R(l,jet)"}, cut), procs, plot_types);
+    pm.Push<HistoStack>(HistoDef(tag, {20, 0., 6, max_dr_lj, "Max. #Delta R(l,jet)"}, cut), procs, plot_types);
   }
 
   pm.Push<EventScan>("dilep_angle", dilep_mm || dilep_em, vector<NamedFunc>{

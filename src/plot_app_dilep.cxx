@@ -135,67 +135,67 @@ int main(int argc, char *argv[]){
   vector<PlotOpt> plot_types = {lin_lumi_info};
 
   PlotMaker pm;
-  // pm.Push<HistoStack>(HistoDef(25, 0., 600., "mus_pt[0]", "Muon pT","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(20, 0., 0.1, "mus_pterr[0]/mus_pt[0]", "Muon relative pT error","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(20, 0., 20, "mus_trk_algo[0]", "Muon reco algorithm","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(3, 0., 3, "mus_trk_nholes_in[0]", "Holes in inner track","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(5, 0., 5, "mus_trk_nholes_out[0]", "Holes in outer track","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(2, 0., 2, "mus_trk_quality[0]", "Muon is high purity","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(2, 0., 2, "mus_tight[0]", "Muon is tight","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(3, -1., 2, "mus_charge[0]", "Muon charge","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(30, 0., 5., "mus_em_e[0]", "Muon E deposited in ECAL","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(30, 0., 20., "mus_had_e[0]", "Muon E deposited in HCAL","nmus==1", "1./2.6", {}),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({25, 0., 600., "mus_pt[0]", "Muon pT"},"nmus==1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({20, 0., 0.1, "mus_pterr[0]/mus_pt[0]"}, "Muon relative pT error","nmus==1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({20, 0., 20, "mus_trk_algo[0]", "Muon reco algorithm"},"nmus==1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({3, 0., 3, "mus_trk_nholes_in[0]", "Holes in inner track"},"nmus==1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({5, 0., 5, "mus_trk_nholes_out[0]", "Holes in outer track"},"nmus==1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({2, 0., 2, "mus_trk_quality[0]", "Muon is high purity"},"nmus==1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({2, 0., 2, "mus_tight[0]", "Muon is tight","nmus==1"}, "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({3, -1., 2, "mus_charge[0]", "Muon charge","nmus==1"}, "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({30, 0., 5., "mus_em_e[0]", "Muon E deposited in ECAL"},"nmus==1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({30, 0., 20., "mus_had_e[0]", "Muon E deposited in HCAL"},"nmus==1", "1./2.6"),all_regs, plot_types);
   
-  // pm.Push<HistoStack>(HistoDef(15, 0., 600., "elmu_m", "elmu_m","1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(15, 0., 600., "elmu_pt", "elmu_pt","1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(16, 0., 3.2, "dphi_lmet", "dphi_lmet","1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(10, 0., 1000, "jetsys_pt", "jetsys_pt","1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(10, 0., 1000, "jetsys_nob_pt", "jetsys_nob_pt","1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(20, 0., 1, "mus_miniso[0]", "mus_miniso","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(20, 0., 1, "mus_reliso[0]", "mus_reliso","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(20, 0., 200, "mus_reliso[0]*mus_pt[0]", "mus_absiso","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(21, 0, 21, "run-274400", "Run number","nmus==1", "1./2.6", {}),all_regs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(30, 274100, 274421, "run", "Run number","1", "1./2.6", {}),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({15, 0., 600., "elmu_m", "elmu_m"},"1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({15, 0., 600., "elmu_pt", "elmu_pt"},"1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({16, 0., 3.2, "dphi_lmet", "dphi_lmet"},"1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({10, 0., 1000, "jetsys_pt", "jetsys_pt"},"1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({10, 0., 1000, "jetsys_nob_pt", "jetsys_nob_pt"},"1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({20, 0., 1, "mus_miniso[0]", "mus_miniso","nmus==1"}, "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({20, 0., 1, "mus_reliso[0]", "mus_reliso","nmus==1"}, "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({20, 0., 200, "mus_reliso[0]*mus_pt[0]", "mus_absiso"},"nmus==1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({21, 0, 21, "run-274400", "Run number"},"nmus==1", "1./2.6"),all_regs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({30, 274100, 274421, "run", "Run number"},"1", "1./2.6"),all_regs, plot_types);
 
   // ------------------- MET 150-200 ----------------------
-  pm.Push<HistoStack>(HistoDef(13, 25, 1000, "mj14", "M_{J} [GeV]","met>150&&met<200 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight", {250., 400.}),lowmet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(13, 25, 1000, "mj14", "M_{J} [GeV]","met>150&&met<200 && nels==2 && nbm<=2 && njets>=5", "weight", {250., 400.}),lowmet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(13, 25, 1000, "mj14", "M_{J} [GeV]","met>150&&met<200 && nmus==2 && nbm<=2 && njets>=5", "weight", {250., 400.}),lowmet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(13, 25, 1000, "mj14", "M_{J} [GeV]","met>150&&met<200 && nleps==2 && nbm<=2 && njets>=5", "weight", {250., 400.}),lowmet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({13, 25, 1000, "mj14", "M_{J} [GeV]", {250., 400.}},"met>150&&met<200 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({13, 25, 1000, "mj14", "M_{J} [GeV]", {250., 400.}},"met>150&&met<200 && nels==2 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({13, 25, 1000, "mj14", "M_{J} [GeV]", {250., 400.}},"met>150&&met<200 && nmus==2 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({13, 25, 1000, "mj14", "M_{J} [GeV]", {250., 400.}},"met>150&&met<200 && nleps==2 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
 
-  pm.Push<HistoStack>(HistoDef(10,0.,280., "mt", "m_{T} [GeV]","met>150&&met<200 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight", {140.}),lowmet_procs, plot_types);
-  pm.Push<HistoStack>(HistoDef(10,0.,280., "mt", "m_{T} [GeV]","mj14>400 && met>150&&met<200 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight", {140.}),lowmet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(6,0.,280., "mt", "m_{T} [GeV]","met>150&&met<200 && nels==2 && nbm<=2 && njets>=5", "weight", {140.}),lowmet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(6,0.,280., "mt", "m_{T} [GeV]","met>150&&met<200 && nmus==2 && nbm<=2 && njets>=5", "weight", {140.}),lowmet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(6,0.,280., "mt", "m_{T} [GeV]","met>150&&met<200 && nleps==2 && nbm<=2 && njets>=5", "weight", {140.}),lowmet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,280., "mt", "m_{T} [GeV]", {140.}},"met>150&&met<200 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,280., "mt", "m_{T} [GeV]", {140.}}, "mj14>400 && met>150&&met<200 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({6,0.,280., "mt", "m_{T} [GeV]", {140.}}, "met>150&&met<200 && nels==2 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({6,0.,280., "mt", "m_{T} [GeV]", {140.}},"met>150&&met<200 && nmus==2 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({6,0.,280., "mt", "m_{T} [GeV]", {140.}}, "met>150&&met<200 && nleps==2 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
  
-  pm.Push<HistoStack>(HistoDef(10,0.,400., "mus_pt[0]", "p_{T} (#mu) [GeV]","met>150&&met<200 && nleps==2 && nmus>=1 && nbm<=2 && njets>=5", "weight", {}),lowmet_procs, plot_types);
-  pm.Push<HistoStack>(HistoDef(10,0.,400., "els_pt[0]", "p_{T} (e)[GeV]","met>150&&met<200 && nleps==2 && nels>=1 && nbm<=2 && njets>=5", "weight", {}),lowmet_procs, plot_types);
-  pm.Push<HistoStack>(HistoDef(10,0.,400., "mus_pt[0]", "p_{T} (#mu) [GeV]","mj14>400 && met>150&&met<200 && nleps==2 && nmus>=1 && nbm<=2 && njets>=5", "weight", {}),lowmet_procs, plot_types);
-  pm.Push<HistoStack>(HistoDef(10,0.,400., "els_pt[0]", "p_{T} (e)[GeV]","mj14>400 && met>150&&met<200 && nleps==2 && nels>=1 && nbm<=2 && njets>=5", "weight", {}),lowmet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,400., "mus_pt[0]", "p_{T} (#mu) [GeV]"},"met>150&&met<200 && nleps==2 && nmus>=1 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,400., "els_pt[0]", "p_{T} (e)[GeV]"},"met>150&&met<200 && nleps==2 && nels>=1 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,400., "mus_pt[0]", "p_{T} (#mu) [GeV]"},"mj14>400 && met>150&&met<200 && nleps==2 && nmus>=1 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,400., "els_pt[0]", "p_{T} (e)[GeV]"},"mj14>400 && met>150&&met<200 && nleps==2 && nels>=1 && nbm<=2 && njets>=5", "weight"),lowmet_procs, plot_types);
 
   // ------------------- MET 200-350 ----------------------
-  pm.Push<HistoStack>(HistoDef(13, 25, 1000, "mj14", "M_{J} [GeV]","met>200&&met<350 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight", {250., 400.}),himet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(13, 25, 1000, "mj14", "M_{J} [GeV]","met>200&&met<350 && nels==2 && nbm<=2 && njets>=5", "weight", {250., 400.}),himet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(13, 25, 1000, "mj14", "M_{J} [GeV]","met>200&&met<350 && nmus==2 && nbm<=2 && njets>=5", "weight", {250., 400.}),himet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(13, 25, 1000, "mj14", "M_{J} [GeV]","met>200&&met<350 && nleps==2 && nbm<=2 && njets>=5", "weight", {250., 400.}),himet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({13, 25, 1000, "mj14", "M_{J} [GeV]", {250., 400.}},"met>200&&met<350 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({13, 25, 1000, "mj14", "M_{J} [GeV]", {250., 400.}},"met>200&&met<350 && nels==2 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({13, 25, 1000, "mj14", "M_{J} [GeV]", {250., 400.}},"met>200&&met<350 && nmus==2 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({13, 25, 1000, "mj14", "M_{J} [GeV]", {250., 400.}},"met>200&&met<350 && nleps==2 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
 
-  pm.Push<HistoStack>(HistoDef(10,0.,280., "mt", "m_{T} [GeV]","met>200&&met<350 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight", {140.}),himet_procs, plot_types);
-  pm.Push<HistoStack>(HistoDef(10,0.,280., "mt", "m_{T} [GeV]","mj14>400 && met>200&&met<350 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight", {140.}),himet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(6,0.,280., "mt", "m_{T} [GeV]","met>200&&met<350 && nels==2 && nbm<=2 && njets>=5", "weight", {140.}),himet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(6,0.,280., "mt", "m_{T} [GeV]","met>200&&met<350 && nmus==2 && nbm<=2 && njets>=5", "weight", {140.}),himet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(6,0.,280., "mt", "m_{T} [GeV]","met>200&&met<350 && nleps==2 && nbm<=2 && njets>=5", "weight", {140.}),himet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,280., "mt", "m_{T} [GeV]", {140.}},"met>200&&met<350 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,280., "mt", "m_{T} [GeV]", {140.}},"mj14>400 && met>200&&met<350 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({6,0.,280., "mt", "m_{T} [GeV]", {140.}},"met>200&&met<350 && nels==2 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({6,0.,280., "mt", "m_{T} [GeV]", {140.}},"met>200&&met<350 && nmus==2 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({6,0.,280., "mt", "m_{T} [GeV]", {140.}},"met>200&&met<350 && nleps==2 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
 
-  pm.Push<HistoStack>(HistoDef(10,0.,400., "mus_pt[0]", "p_{T} (#mu) [GeV]","met>200&&met<350 && nleps==2 && nmus>=1 && nbm<=2 && njets>=5", "weight", {}),himet_procs, plot_types);
-  pm.Push<HistoStack>(HistoDef(10,0.,400., "els_pt[0]", "p_{T} (e)[GeV]","met>200&&met<350 && nleps==2 && nels>=1 && nbm<=2 && njets>=5", "weight", {}),himet_procs, plot_types);
-  pm.Push<HistoStack>(HistoDef(10,0.,400., "mus_pt[0]", "p_{T} (#mu) [GeV]","mj14>400 && met>200&&met<350 && nleps==2 && nmus>=1 && nbm<=2 && njets>=5", "weight", {}),himet_procs, plot_types);
-  pm.Push<HistoStack>(HistoDef(10,0.,400., "els_pt[0]", "p_{T} (e)[GeV]","mj14>400 && met>200&&met<350 && nleps==2 && nels>=1 && nbm<=2 && njets>=5", "weight", {}),himet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,400., "mus_pt[0]", "p_{T} (#mu) [GeV]"},"met>200&&met<350 && nleps==2 && nmus>=1 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,400., "els_pt[0]", "p_{T} (e)[GeV]"},"met>200&&met<350 && nleps==2 && nels>=1 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,400., "mus_pt[0]", "p_{T} (#mu) [GeV]"},"mj14>400 && met>200&&met<350 && nleps==2 && nmus>=1 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({10,0.,400., "els_pt[0]", "p_{T} (e)[GeV]"},"mj14>400 && met>200&&met<350 && nleps==2 && nels>=1 && nbm<=2 && njets>=5", "weight"),himet_procs, plot_types);
 
   // ------------------- MET 150-500 ----------------------
-  pm.Push<HistoStack>(HistoDef(12,200.,500., "met", "MET[GeV]","met>200 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight", {350.}),allmet_procs, plot_types);
-  pm.Push<HistoStack>(HistoDef(12,200.,500., "met", "MET[GeV]","mj14>400 && met>200 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight", {350.}),allmet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(12,200.,500., "met", "MET[GeV]","met>200 && nleps==2 && nels>=1 && nbm<=2 && njets>=5", "weight", {350.}),allmet_procs, plot_types);
-  // pm.Push<HistoStack>(HistoDef(12,200.,500., "met", "MET[GeV]","met>200 && nleps==2 && nmus>=1 && nbm<=2 && njets>=5", "weight", {350.}),allmet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({12,200.,500., "met", "MET[GeV]", {350.}},"met>200 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight"),allmet_procs, plot_types);
+  pm.Push<HistoStack>(HistoDef({12,200.,500., "met", "MET[GeV]", {350.}},"mj14>400 && met>200 && nels==1 && nmus==1 && nbm<=2 && njets>=5", "weight"),allmet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({12,200.,500., "met", "MET[GeV]", {350.}},"met>200 && nleps==2 && nels>=1 && nbm<=2 && njets>=5", "weight"),allmet_procs, plot_types);
+  // pm.Push<HistoStack>(HistoDef({12,200.,500., "met", "MET[GeV]", {350.}},"met>200 && nleps==2 && nmus>=1 && nbm<=2 && njets>=5", "weight"),allmet_procs, plot_types);
 
   if(single_thread) pm.multithreaded_ = false;
   pm.MakePlots(lumi);
