@@ -55,6 +55,7 @@ float mt2_0mass
 float dphi_wlep
 bool jetmismeas
 
+float mct
 ###################   MET   ##################
 float met
 float met_phi
@@ -132,6 +133,8 @@ std::vector<int>   jets_fjet16_index
 std::vector<int>   jets_hflavor
 std::vector<bool>  jets_h1
 std::vector<bool>  jets_h2
+
+std::vector<float> b_pt
 
 ##################   Leptons   ################
 int nleps
@@ -257,6 +260,8 @@ float m_bb_2
 float m_bb_max
 float m_bb_min
 
+float m_bb
+
 float dr_bl_min
 float dr_bl_max
 float dr_bl_min2
@@ -280,6 +285,8 @@ float mt_bmet_min2
 float mt_bmet_max2
 
 float dphi_lmet
+
+float m_jj
 
 ##################   Photons   ###################
 int nph

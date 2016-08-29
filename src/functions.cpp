@@ -1,6 +1,7 @@
 #include "functions.hpp"
 
 #include "TVector2.h"
+#include "TLorentzVector.h"
 
 #include "utilities.hpp"
 
@@ -158,7 +159,59 @@ namespace Functions{
       }
       return maxr;
     });
+  const NamedFunc b_pt ("b_pt", [](const Baby &b) -> NamedFunc::VectorType{
+	  std::vector<double> pt;
+      for (size_t ijet = 0; ijet < b.jets_pt() -> size(); ijet++) {
+		if (b.jets_csv()->at(ijet) > 0.8) pt.push_back(b.jets_pt()->at(ijet));
+	  }
+	  return pt;
+  });
+  const NamedFunc m_bb ("m_bb", [](const Baby &b) -> NamedFunc::ScalarType{
+	  std::vector<TLorentzVector> bjets;
+	  for (size_t ijet = 0; ijet < b.jets_pt() -> size(); ijet++) {
+		if (b.jets_csv()->at(ijet) > 0.8) {
+		  TLorentzVector bjet;
+		  bjet.SetPtEtaPhiM(b.jets_pt()->at(ijet), b.jets_eta()->at(ijet), b.jets_phi()->at(ijet), b.jets_m()->at(ijet));
+		  bjets.push_back(bjet);
+		}
+		  	  
+	 }
 
+	  TLorentzVector h = bjets.at(1) + bjets.at(0);
+	  return h.M();
+  });
+ const NamedFunc mct("mct", [](const Baby &b) -> NamedFunc::ScalarType{
+	 if (b.nbm()>=2) {
+		  std::vector<float> bpt;
+		  for (size_t ijet = 0; ijet < b.jets_pt() -> size(); ijet++) {
+			if (b.jets_csv()->at(ijet) > 0.8) bpt.push_back(b.jets_pt()->at(ijet));
+		  } 
+		  return sqrt(2*bpt.at(0)*bpt.at(1)*(1+cos(b.dphi_bb_2())));
+	 }
+	 else
+	 {
+		if (b.njets()<2) return -999;
+		float dphi = fabs(b.jets_phi()->at(0)-b.jets_phi()->at(0));
+		return sqrt(2*b.jets_pt()->at(0)*b.jets_pt()->at(1)*(1+cos(dphi)));
+	}
+  });
+
+  const NamedFunc m_jj("m_jj", [](const Baby &b) -> NamedFunc::ScalarType{
+  	  if (b.njets()!=2) return -999;
+	  else {
+	  TLorentzVector j1, j2;
+	  j1.SetPtEtaPhiM(b.jets_pt()->at(0), b.jets_eta()->at(0), b.jets_phi()->at(0), b.jets_m()->at(0));
+	  j2.SetPtEtaPhiM(b.jets_pt()->at(1), b.jets_eta()->at(1), b.jets_phi()->at(1), b.jets_m()->at(1));
+	  return sqrt(j1.M2()+j2.M2()+2.*(j1.E()*j2.E()-j1.Px()*j2.Px()-j1.Py()*j2.Py()-j1.Pz()*j2.Pz()));}
+  });
+/*
+  const NamedFunc mtb("mtb", [](const Baby &b) -> NamedFunc::ScalarType{
+	std::vector<float> mtbs;
+	for (size_t ijet=0; ijet<b.jets_pt()->size(); ijet++) {
+		
+	}
+  });
+*/
   bool IsGoodJet(const Baby &b, size_t ijet){
     return ijet<b.jets_pt()->size()
       && b.jets_pt()->at(ijet) > 30.
