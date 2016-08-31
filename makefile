@@ -1,33 +1,5 @@
-EXEDIR := run
-OBJDIR := bin
-SRCDIR := src
-INCDIR := inc
-MAKEDIR := bin
 BABYDIR := txt/variables
 LIBFILE := $(OBJDIR)/libStatObj.a
-
-CXX := $(shell root-config --cxx)
-EXTRA_WARNINGS := -Wcast-align -Wcast-qual -Wdisabled-optimization -Wformat=2 -Wformat-nonliteral -Wformat-security -Wformat-y2k -Winit-self -Winvalid-pch -Wlong-long -Wmissing-format-attribute -Wmissing-include-dirs -Wmissing-noreturn -Wpacked -Wpointer-arith -Wredundant-decls -Wstack-protector -Wswitch-default -Wswitch-enum -Wundef -Wunused -Wvariadic-macros -Wwrite-strings -Wabi -Wctor-dtor-privacy -Wnon-virtual-dtor -Wsign-promo -Wsign-compare #-Wunsafe-loop-optimizations -Wfloat-equal -Wsign-conversion -Wunreachable-code
-CXXFLAGS := -isystem $(shell root-config --incdir) -Wall -Wextra -pedantic -Werror -Wshadow -Woverloaded-virtual -Wold-style-cast $(EXTRA_WARNINGS) $(shell root-config --cflags) -O2 -I $(INCDIR) -std=c++11
-LD := $(shell root-config --ld)
-LDFLAGS := $(shell root-config --ldflags)
-LDLIBS := $(shell root-config --libs) -lMinuit -lRooStats -lRooFitCore -lRooFit -lTreePlayer 
-
-BABY_FILES := $(wildcard $(BABYDIR)/*)
-BABY_TYPES := $(notdir $(basename $(BABY_FILES)))
-BABY_SRCS := $(addprefix $(SRCDIR)/baby_, $(addsuffix .cpp, $(BABY_TYPES)))
-BABY_INCS := $(addprefix $(INCDIR)/baby_, $(addsuffix .hpp, $(BABY_TYPES)))
-BABY_OBJS := $(addprefix $(OBJDIR)/baby_, $(addsuffix .o, $(BABY_TYPES)))
-BABY_DEPS := $(addprefix $(MAKEDIR)/baby_, $(addsuffix .d, $(BABY_TYPES)))
-
-EXECUTABLES := $(addprefix $(EXEDIR)/, $(addsuffix .exe, $(notdir $(basename $(wildcard $(SRCDIR)/*.cxx))))) 
-OBJECTS := $(addprefix $(OBJDIR)/, $(addsuffix .o, $(notdir $(basename $(wildcard $(SRCDIR)/*.cpp))))) $(OBJDIR)/baby.o $(BABY_OBJS)
-
-FIND_DEPS = $(CXX) $(CXXFLAGS) -MM -MG -MF $@ $<
-EXPAND_DEPS = perl -pi -e 's|$*.o|$(OBJDIR)/$*.o $(MAKEDIR)/$*.d|g' $@
-GET_DEPS = $(FIND_DEPS) && $(EXPAND_DEPS)
-COMPILE = $(CXX) $(CXXFLAGS) -o $@ -c $<
-LINK = $(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 vpath %.cpp $(SRCDIR)
 vpath %.cxx $(SRCDIR)
@@ -36,43 +8,91 @@ vpath %.o $(OBJDIR)
 vpath %.exe $(EXEDIR)
 vpath %.d $(MAKEDIR)
 
-all: $(EXECUTABLES)
+CXX := $(shell root-config --cxx)
+EXTRA_WARNINGS := -Wcast-align -Wcast-qual -Wdisabled-optimization -Wformat=2 -Wformat-nonliteral -Wformat-security -Wformat-y2k -Winit-self -Winvalid-pch -Wlong-long -Wmissing-format-attribute -Wmissing-include-dirs -Wmissing-noreturn -Wpacked -Wpointer-arith -Wredundant-decls -Wstack-protector -Wswitch-default -Wswitch-enum -Wundef -Wunused -Wvariadic-macros -Wwrite-strings -Wabi -Wctor-dtor-privacy -Wnon-virtual-dtor -Wsign-promo -Wsign-compare #-Wunsafe-loop-optimizations -Wfloat-equal -Wsign-conversion -Wunreachable-code
+CXXFLAGS := -isystem $(shell root-config --incdir) -Wall -Wextra -pedantic -Werror -Wshadow -Woverloaded-virtual -Wold-style-cast $(EXTRA_WARNINGS) $(shell root-config --cflags) -O2 -I $(INCDIR) -std=c++11
+LD := $(shell root-config --ld)
+LDFLAGS := $(shell root-config --ldflags)
+LDLIBS := $(shell root-config --libs) -lMinuit -lRooStats -lRooFitCore -lRooFit -lTreePlayer 
 
--include $(addsuffix .d,$(addprefix $(MAKEDIR)/,$(notdir $(basename $(wildcard $(SRCDIR)/*.cpp)))))
--include $(addsuffix .d,$(addprefix $(MAKEDIR)/,$(notdir $(basename $(wildcard $(SRCDIR)/*.cxx)))))
--include $(MAKEDIR)/baby.d $(BABY_DEPS)
+GET_DEPS = $(CXX) $(CXXFLAGS) -MM -MP -MT "$(subst $(SRCDIR),$(OBJDIR),$(subst .cxx,.o,$(subst .cpp,.o,$<))) $@" -MF $@ $<
+COMPILE = $(CXX) $(CXXFLAGS) -o $@ -c $<
+LINK = $(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-$(LIBFILE): $(OBJECTS)
+BABY_FILES := $(wildcard $(BABYDIR)/*)
+BABY_TYPES := $(notdir $(basename $(BABY_FILES)))
+BABY_SRCS := $(addprefix $(SRCDIR)/core/baby_, $(addsuffix .cpp, $(BABY_TYPES)))
+BABY_INCS := $(addprefix $(INCDIR)/core/baby_, $(addsuffix .hpp, $(BABY_TYPES)))
+BABY_OBJS := $(addprefix $(OBJDIR)/core/baby_, $(addsuffix .o, $(BABY_TYPES)))
+BABY_DEPS := $(addprefix $(MAKEDIR)/core/baby_, $(addsuffix .d, $(BABY_TYPES)))
 
-$(MAKEDIR)/%.d: $(SRCDIR)/%.cpp
-	$(GET_DEPS)
+FILTER_OUT = $(foreach v,$(2),$(if $(findstring $(1),$(v)),,$(v)))
 
-$(MAKEDIR)/%.d: $(SRCDIR)/%.cxx
-	$(GET_DEPS)
+HEADERS := $(call FILTER_OUT,.\#,$(shell find $(INCDIR) -name "*.hpp"))
+OBJSRCS := $(call FILTER_OUT,.\#,$(shell find $(SRCDIR) -name "*.cpp"))
+EXESRCS := $(call FILTER_OUT,.\#,$(shell find $(SRCDIR) -name "*.cxx"))
+ALLSRCS := $(OBJSRCS) $(EXESRCS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+EXECUTABLES := $(subst $(SRCDIR),$(EXEDIR),$(subst .cxx,.exe,$(EXESRCS)))
+OBJECTS := $(subst $(SRCDIR),$(OBJDIR),$(subst .cpp,.o,$(OBJSRCS))) $(OBJDIR)/core/baby.o $(BABY_OBJS)
+DEPFILES := $(subst $(SRCDIR),$(MAKEDIR),$(subst .cpp,.d,$(subst .cxx,.d,$(ALLSRCS))))
+
+PRINT_FUNC = echo -e "\e[34;1m$(1):\e[0m $($(1))"
+
+all: delay
+
+print_vars:
+	$(call PRINT_FUNC,SRCDIR)
+	$(call PRINT_FUNC,INCDIR)
+	$(call PRINT_FUNC,MAKEDIR)
+	$(call PRINT_FUNC,OBJDIR)
+	$(call PRINT_FUNC,EXEDIR)
+
+	$(call PRINT_FUNC,BABY_FILES)
+	$(call PRINT_FUNC,BABY_TYPES)
+	$(call PRINT_FUNC,BABY_SRCS)
+	$(call PRINT_FUNC,BABY_INCS)
+	$(call PRINT_FUNC,BABY_OBJS)
+	$(call PRINT_FUNC,BABY_DEPS)
+
+	$(call PRINT_FUNC,HEADERS)
+	$(call PRINT_FUNC,OBJSRCS)
+	$(call PRINT_FUNC,EXESRCS)
+	$(call PRINT_FUNC,ALLSRCS)
+
+	$(call PRINT_FUNC,EXECUTABLES)
+	$(call PRINT_FUNC,OBJECTS)
+	$(call PRINT_FUNC,DEPFILES)
+
+include .subdirs.mk
+
+.subdirs.mk: $(BABY_SRCS) $(BABY_INCS) $(HEADERS) $(ALLSRCS)
+	./compile.py set_dirs --src_dir $(SRCDIR) --inc_dir $(INCDIR) --obj_dir $(OBJDIR) --make_dir $(MAKEDIR) --exe_dir $(EXEDIR)
+
+$(OBJDIR)/core/generate_baby.o: $(SRCDIR)/core/generate_baby.cxx
 	$(COMPILE)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cxx
-	$(COMPILE)
-
-$(OBJDIR)/%.a:
-	ar rcsv $@ $^
-
-$(EXEDIR)/generate_baby.exe: $(OBJDIR)/generate_baby.o
-	$(LINK)
-
-$(EXEDIR)/%.exe: $(OBJDIR)/%.o $(LIBFILE)
+$(EXEDIR)/core/generate_baby.exe: $(OBJDIR)/core/generate_baby.o
 	$(LINK)
 
 .SECONDARY: dummy_baby.all
 .PRECIOUS: generate_baby.o
 
-$(BABY_SRCS) $(BABY_INCS) $(SRCDIR)/baby.cpp $(INCDIR)/baby.hpp: dummy_baby.all
-	echo "Regenerated baby source code $@"
+$(BABY_SRCS) $(BABY_INCS) $(SRCDIR)/core/baby.cpp $(INCDIR)/core/baby.hpp: dummy_baby.all
+	: "Regenerated baby source code $@"
 
-dummy_baby.all: $(EXEDIR)/generate_baby.exe $(BABY_FILES) $(BABYDIR)
-	rm -f src/baby*.cpp inc/baby*.hpp bin/baby*.o bin/baby*.d
+dummy_baby.all: $(EXEDIR)/core/generate_baby.exe $(BABY_FILES) $(BABYDIR)
+	rm -f src/core/baby*.cpp inc/core/baby*.hpp bin/core/baby*.o bin/core/baby*.d
 	./$< $(BABY_TYPES)
 
+include $(DEPFILES) $(BABY_DEPS)
+
+delay: $(EXECUTABLES)
+
+$(LIBFILE): $(OBJECTS)
+
+$(OBJDIR)/%.a:
+	ar rcsv $@ $^
+
+.PHONY: all delay test
 .DELETE_ON_ERROR:
